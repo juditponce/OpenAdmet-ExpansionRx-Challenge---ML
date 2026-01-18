@@ -1,6 +1,10 @@
 # OpenAdmet-ExpansionRx-Challenge---ML
 Machine Learning model for ADMET property prediction
 
+## Authors: 
+- Judit Ponce Casañas
+- Alberto Alexander Robles Loaiza
+
 ## Model Description
 A supervised machine learning pipeline was developed to predict multiple ADMET-related properties from molecular structure information. Independent regression models were trained for each ADMET endpoint, reflecting the heterogeneous nature of ADMET properties and their experimental variability.
 
