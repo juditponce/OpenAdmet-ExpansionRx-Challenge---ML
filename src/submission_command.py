@@ -314,10 +314,13 @@ for col in y_cols:
         predictions_all["XGB"].get(col, 0)
     ) / 3
 
-ensemble.to_csv("ensemble_svm_rf_xgb.csv", index=False)
-print("Ensemble generado correctamente")
-# %%
-resultados = pd.read_csv("ensemble_svm_rf_xgb.csv")
+def inverse_log_transform(y_pred_log, multiplier):
+    return (10 ** y_pred_log) / multiplier
+
+for col in y_cols:
+    for key, (log_scale, multiplier, short_name) in conversion_dict.items():
+        if short_name == col and log_scale:
+            ensemble[col] = inverse_log_transform(ensemble[col].values, multiplier)
 
 rename_dict = {
     "LogD": "LogD",
@@ -331,8 +334,8 @@ rename_dict = {
     "Log_Mouse_MPB": "MGMB"
 }
 
-resultados = resultados.rename(columns={col: rename_dict[col] for col in resultados.columns if col in rename_dict})
-resultados.to_csv("ensemble_svm_rf_xgb_ver_fin.csv", index=False)
-print(resultados.head())
+ensemble = ensemble.rename(columns={col: rename_dict[col] for col in ensemble.columns if col in rename_dict})
+
+ensemble.to_csv("ensemble_svm_rf_xgb_original_scale.csv", index=False)
 
 
