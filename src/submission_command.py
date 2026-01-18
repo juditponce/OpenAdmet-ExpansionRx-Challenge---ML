@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jan  9 18:28:41 2026
-
-@author: Judit
-"""
-
 # %%
 import pandas as pd
 import seaborn as sns
@@ -340,4 +334,5 @@ rename_dict = {
 resultados = resultados.rename(columns={col: rename_dict[col] for col in resultados.columns if col in rename_dict})
 resultados.to_csv("ensemble_svm_rf_xgb_ver_fin.csv", index=False)
 print(resultados.head())
+
 
